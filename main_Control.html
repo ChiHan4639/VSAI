@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" class="bg-dark">
+
+<head>
+    <title>VS AI Voting Test Monitor</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+
+    <!-- 引用MQTT的CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+
+</head>
+
+<body class="bg-dark">
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            </div>
+            <h1 class="mt-4 mb-4 text-white">VS AI Voting Monitor</h1>
+            <div class="col">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md mb-4 text-center text-white">
+                <!--button type="button" class="btn btn-primary w-10" onclick='subscribe();'>Subscribe</button-->
+                <a>觀眾比分：</a><a id="smname"> ＿＿＿</a> <br>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body bg-dark">
+                        <p class="card-text text-center">
+                            <button type="button" class="btn btn-success w-30 mb-2" onclick='publish("reset");'>倒數開始(重設比數)</button>
+                            <button type="button" class="btn btn-primary w-30 mb-2" onclick='publish("4");'>結算比分</button>
+                            <!--button type="button" class="btn btn-primary w-50" onclick='publish("2");'>Player2</button-->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 相關業務程式碼 -->
+    <script src="javascript/utility_paho_sub.js"></script>
+
+</body>
+
+</html>
