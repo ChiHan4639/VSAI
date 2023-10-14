@@ -79,6 +79,13 @@ function publish(ledState) {
    
 }
 
+var btnP1 = document.getElementById("p1");
+btnP1.onclick = publish("1");
+
+var btnP2 = document.getElementById("p2");
+btnP2.onclick = publish("2");
+
+
 function disconnect() {
     logMessage("INFO", "Disconnecting from Server.");
     client.disconnect();
