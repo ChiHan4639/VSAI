@@ -1,4 +1,4 @@
 # VSAI
 online mqtt voting system
 
-#test upload
+Only use for the day of competition.
