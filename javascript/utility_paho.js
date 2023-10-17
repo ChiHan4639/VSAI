@@ -5,7 +5,7 @@ var port = "8084";    //使用WSS協議的介面地址
 
 let Voted = false;
 
-var topic = "python/mqtt";
+var topic = "python/mqtt/vsai";
 
 /*
 var passWord = "26435VSAItest";
@@ -44,7 +44,7 @@ var options = {
 client.connect(options);
 
 function subscribe() {
-    var topic = "python/mqtt";
+    var topic = "python/mqtt/vsai";
     var qos = 0;
     logMessage("INFO", "Subscribing to: [Topic: ", topic, ", QoS: ", qos, "]");
     client.subscribe(topic, { qos: Number(qos) });
@@ -90,8 +90,9 @@ function disconnect() {
 }
 
 function SetJudgeNum(Jnum){
-    topic = "python/mqtt/"+Jnum;
+    topic = "python/mqtt/vsai/"+Jnum;
     Voted = false;
+    CloseModal();
 }
 
 
@@ -167,4 +168,3 @@ function logMessage(type, ...content) {
         console.log(logMessage);
     }
 }
-
