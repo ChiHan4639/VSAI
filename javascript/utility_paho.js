@@ -5,6 +5,8 @@ var port = "8084";    //使用WSS協議的介面地址
 
 let Voted = false;
 
+var topic = "python/mqtt";
+
 /*
 var passWord = "26435VSAItest";
 var username = "GhanAtVsAi4639";
@@ -48,16 +50,14 @@ function subscribe() {
     client.subscribe(topic, { qos: Number(qos) });
 }
 
+
 function publish(ledState) {
-    var topic = "python/mqtt";
     var qos = 0;
     var message = ledState;
     var retain = false;
 
-    //message = "{\"LED\":\"" + message + "\"} ";
-
-
-    logMessage("INFO", "Publishing Message: [Topic: ", topic, ", Payload: ", message, ", QoS: ", qos, ", Retain: ", retain, "]");
+    if(Voted == false){
+        logMessage("INFO", "Publishing Message: [Topic: ", topic, ", Payload: ", message, ", QoS: ", qos, ", Retain: ", retain, "]");
         message = new Paho.MQTT.Message(message);
         message.destinationName = topic;
         message.qos = Number(qos);
@@ -66,17 +66,15 @@ function publish(ledState) {
         //無法重複投票
         Voted = true; 
 
-/*
-    if(Voted == false){
-
-    
+        alert('投票成功');
     }
     else{
-
-        document.getElementById('myModal').modal("show");
+        alert('已經投過了');
+        //document.getElementById('myModal').modal("show");
     }
-*/
-   
+
+    
+
 }
 
 var btnP1 = document.getElementById("p1");
@@ -91,8 +89,10 @@ function disconnect() {
     client.disconnect();
 }
 
-
-
+function SetJudgeNum(Jnum){
+    topic = "python/mqtt/"+Jnum;
+    Voted = false;
+}
 
 
 // called when the client loses its connection

@@ -39,8 +39,11 @@ var options = {
 
 client.connect(options);
 
-function subscribe() {
-    var topic = "python/count";
+var Stopic = "default";
+//"python/count"
+
+function subscribe(Stopic) {
+    var topic = Stopic;
     var qos = 0;
     logMessage("INFO", "Subscribing to: [Topic: ", topic, ", QoS: ", qos, "]");
     client.subscribe(topic, { qos: Number(qos) });
@@ -83,7 +86,28 @@ function onConnectionLost(responseObject) {
 // called when a message arrives
 function onMessageArrived(message) {
     logMessage("INFO", "Message Recieved: [Topic: ", message.destinationName, ", Payload: ", message.payloadString, ", QoS: ", message.qos, ", Retained: ", message.retained, ", Duplicate: ", message.duplicate, "]");
-    document.getElementById('smname').text= message.payloadString;
+    if(message.destinationName == "python/count"){
+        document.getElementById('smname').text= message.payloadString;
+    }
+    else if(message.destinationName == "python/mqtt/J1"){
+        document.getElementById('Tj1').text= message.payloadString;
+    }
+    else if(message.destinationName == "python/mqtt/J2"){
+        document.getElementById('Tj2').text= message.payloadString;
+    }
+    else if(message.destinationName == "python/mqtt/J3"){
+        document.getElementById('Tj3').text= message.payloadString;
+    }
+    else if(message.destinationName == "python/mqtt/J4"){
+        document.getElementById('Tj4').text= message.payloadString;
+    }
+    else if(message.destinationName == "python/mqtt/J5"){
+        document.getElementById('Tj5').text= message.payloadString;
+    }
+    else{
+        
+    }
+    
 }
 
 
@@ -95,7 +119,12 @@ function onConnect(context) {
     logMessage("INFO", "Connection Success ", "[URI: ", connectionString, ", ID: ", context.invocationContext.clientId, "]");
 
     connected = true;
-    subscribe();
+    subscribe("python/count");
+    subscribe("python/mqtt/J1");
+    subscribe("python/mqtt/J2");
+    subscribe("python/mqtt/J3");
+    subscribe("python/mqtt/J4");
+    subscribe("python/mqtt/J5");
 }
 
 

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>VS AI 觀眾票選＿開發中</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="style.css" rel="stylesheet" >
+
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    
+    <!-- 引用MQTT的CDN -->
+    <script src="javascript/mqttws31-min.js" type="text/javascript"></script>
+
+</head>
+
+<body class="playerMode m-0">
+    <div class="judgeDiv">
+        <button onclick="SetJudgeNum('J1')" id="J1">01</button>
+        <button onclick="SetJudgeNum('J2')" id="J2">02</button>
+        <button onclick="SetJudgeNum('J3')" id="J3">03</button>
+        <button onclick="SetJudgeNum('J4')" id="J4">04</button>
+        <button onclick="SetJudgeNum('J5')" id="J5">05</button>
+    </div>
+    <div class="container">
+        <div class="bg_green w100 center" onclick='publish("1");'>
+            <p class="">Player1</p>
+        </div>
+        <div class="bg_purple w100 center" onclick='publish("2");'>
+            <p class="">Player2</p>
+        </div>
+    </div>
+
+    <!--div class="bg_black w100">
+        <p class="titleTxt m1">VS AI 決賽標準字</p>
+    </div-->
+
+    <script src="javascript/utility_paho.js"></script>
+
+</body>
+
+</html>
