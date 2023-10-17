@@ -88,6 +88,7 @@ function onMessageArrived(message) {
     logMessage("INFO", "Message Recieved: [Topic: ", message.destinationName, ", Payload: ", message.payloadString, ", QoS: ", message.qos, ", Retained: ", message.retained, ", Duplicate: ", message.duplicate, "]");
     if(message.destinationName == "python/count"){
         document.getElementById('smname').text= message.payloadString;
+        //log.console("Get");
     }
     else if(message.destinationName == "python/mqtt/J1"){
         document.getElementById('Tj1').text= message.payloadString;
@@ -105,7 +106,7 @@ function onMessageArrived(message) {
         document.getElementById('Tj5').text= message.payloadString;
     }
     else{
-        
+
     }
     
 }

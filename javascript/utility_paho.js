@@ -5,7 +5,7 @@ var port = "8084";    //使用WSS協議的介面地址
 
 let Voted = false;
 
-var topic = "python/mqtt";
+var topic = "python/mqttvsai";
 
 /*
 var passWord = "26435VSAItest";
@@ -17,7 +17,7 @@ var clientId = makeid();
 
 var connected = false;
 
-var client = new Paho.MQTT.Client(hostname, Number(port), "/mqtt", clientId);
+var client = new Paho.MQTT.Client(hostname, Number(port), "/mqttvsai", clientId);
 
 //logMessage("INFO", "Connecting to Server: [Host: ", hostname, ", Port: ", port, ", Path: ", client.path, ", ID: ", clientId, "]");
 
@@ -44,7 +44,7 @@ var options = {
 client.connect(options);
 
 function subscribe() {
-    var topic = "python/mqtt";
+    var topic = "python/mqttvsai";
     var qos = 0;
     logMessage("INFO", "Subscribing to: [Topic: ", topic, ", QoS: ", qos, "]");
     client.subscribe(topic, { qos: Number(qos) });
@@ -90,7 +90,7 @@ function disconnect() {
 }
 
 function SetJudgeNum(Jnum){
-    topic = "python/mqtt/"+Jnum;
+    topic = "python/mqttvsai/"+Jnum;
     Voted = false;
 }
 
