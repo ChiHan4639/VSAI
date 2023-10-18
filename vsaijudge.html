@@ -20,10 +20,10 @@
 <body class="playerMode m-0">
     <div class="container">
         <div class="bg_green w100 center" onclick='publish("1");'>
-            <p class="">Player1</p>
+            <p class="">點我讓綠色贏</p>
         </div>
         <div class="bg_purple w100 center" onclick='publish("2");'>
-            <p class="">Player2</p>
+            <p class="">點我讓紫色贏</p>
         </div>
     </div>
 
@@ -32,7 +32,7 @@
     </div-->
 
     <!-- Trigger/Open The Modal -->
-    <button id="myBtn">Open Modal</button>
+    <!--button id="myBtn">Open Modal</button-->
 
     <!-- The Modal -->
     <div id="myModal" class="modal">
@@ -41,13 +41,42 @@
         <div class="modal-content">
             <!--span class="close">&times;</span-->
             <div class="judgeDiv">
-                <button class="JudgeBtn" onclick="SetJudgeNum('J1')" id="J1">評審01</button><br>
-                <button class="JudgeBtn" onclick="SetJudgeNum('J2')" id="J2">評審02</button><br>
-                <button class="JudgeBtn" onclick="SetJudgeNum('J3')" id="J3">評審03</button><br>
-                <button class="JudgeBtn" onclick="SetJudgeNum('J4')" id="J4">評審04</button><br>
-                <button class="JudgeBtn" onclick="SetJudgeNum('J5')" id="J5">評審05</button>
-                <br>
-                <button class="CloseBtn" onclick="CloseModal()" >關閉</button>
+                <p class="modalTitle">您是哪一位評審？</p>
+                <button class="JudgeBtn" onclick="SetJudgeNum('J1')" id="J1">蔡宏賢</button><br>
+                <button class="JudgeBtn" onclick="SetJudgeNum('J2')" id="J2">駱以軍</button><br>
+                <button class="JudgeBtn" onclick="SetJudgeNum('J3')" id="J3">陳世川</button><br>
+                <button class="JudgeBtn" onclick="SetJudgeNum('J4')" id="J4">邱浩修</button><br>
+                <button class="JudgeBtn" onclick="SetJudgeNum('J5')" id="J5">吳建龍</button>
+                <!--br>
+                <button class="CloseBtn" onclick="CloseModal()" >關閉</button-->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- The Modal2 -->
+    <div id="myModal2" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <!--span class="close">&times;</span-->
+            <div class="judgeDiv">
+                <a class="modalTitle">此輪已完成投票。<br>待評審完成評分後，將自動進入下一輪比賽之投票</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- The Modal3 -->
+    <div id="myModal3" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <!--span class="close">&times;</span-->
+            <div class="judgeDiv">
+                <p class="modalTitle">說明</p>
+
+                <button class="CloseBtn" onclick="CloseModal()" >投票去</button-->
             </div>
         </div>
 
@@ -58,6 +87,8 @@
 
         // Get the modal
         var modal = document.getElementById("myModal");
+        var modal2 = document.getElementById("myModal2");
+        var modal3 = document.getElementById("myModal3");
 
         // Get the button that opens the modal
         var btn = document.getElementById("myBtn");
@@ -90,6 +121,19 @@
         }
         function CloseModal(){
             modal.style.display = "none";
+        }
+        function StopVote(){
+            modal2.style.display = "block";
+        }
+        function StartVote(){
+            
+            modal2.style.display = "none";
+        }
+        function introOn(){
+            modal3.style.display = "block";
+        }
+        function introOff(){
+            modal3.style.display = "none";
         }
 
     </script>

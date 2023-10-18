@@ -72,7 +72,14 @@ function disconnect() {
 }
 
 
-
+function refreshScore(){
+    document.getElementById('Tj1').text="＿＿＿";
+    document.getElementById('Tj2').text="＿＿＿";
+    document.getElementById('Tj3').text="＿＿＿";
+    document.getElementById('Tj4').text="＿＿＿";
+    document.getElementById('Tj5').text="＿＿＿";
+    publish("reset");
+}
 
 
 // called when the client loses its connection

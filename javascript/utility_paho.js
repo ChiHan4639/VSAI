@@ -66,10 +66,12 @@ function publish(ledState) {
         //無法重複投票
         Voted = true; 
 
-        alert('投票成功');
+        //alert('投票成功');
+        StopVote();
     }
     else{
-        alert('已經投過了');
+        //alert('已經投過了');
+        StopVote();
         //document.getElementById('myModal').modal("show");
     }
 
@@ -112,6 +114,8 @@ function onMessageArrived(message) {
     {
         Voted = false;
         logMessage("INFO", "Count RESET!!");
+        StartVote();
+
     }
 }
 
