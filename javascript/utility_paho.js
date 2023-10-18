@@ -17,7 +17,7 @@ var clientId = makeid();
 
 var connected = false;
 
-var client = new Paho.MQTT.Client(hostname, Number(port), "/mqttvsai", clientId);
+var client = new Paho.MQTT.Client(hostname, Number(port), "/mqtt/vsai", clientId);
 
 //logMessage("INFO", "Connecting to Server: [Host: ", hostname, ", Port: ", port, ", Path: ", client.path, ", ID: ", clientId, "]");
 
