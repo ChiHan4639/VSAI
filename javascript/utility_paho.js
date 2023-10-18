@@ -5,7 +5,7 @@ var port = "8084";    //使用WSS協議的介面地址
 
 let Voted = false;
 
-var topic = "python/mqttvsai";
+var topic = "python/mqtt/vsai";
 
 /*
 var passWord = "26435VSAItest";
@@ -17,7 +17,7 @@ var clientId = makeid();
 
 var connected = false;
 
-var client = new Paho.MQTT.Client(hostname, Number(port), "/mqttvsai", clientId);
+var client = new Paho.MQTT.Client(hostname, Number(port), "/mqtt", clientId);
 
 //logMessage("INFO", "Connecting to Server: [Host: ", hostname, ", Port: ", port, ", Path: ", client.path, ", ID: ", clientId, "]");
 
@@ -44,7 +44,7 @@ var options = {
 client.connect(options);
 
 function subscribe() {
-    var topic = "python/mqttvsai";
+    var topic = "python/mqtt/vsai";
     var qos = 0;
     logMessage("INFO", "Subscribing to: [Topic: ", topic, ", QoS: ", qos, "]");
     client.subscribe(topic, { qos: Number(qos) });
@@ -66,10 +66,12 @@ function publish(ledState) {
         //無法重複投票
         Voted = true; 
 
-        alert('投票成功');
+        //alert('投票成功');
+        StopVote();
     }
     else{
-        alert('已經投過了');
+        //alert('已經投過了');
+        StopVote();
         //document.getElementById('myModal').modal("show");
     }
 
@@ -90,8 +92,9 @@ function disconnect() {
 }
 
 function SetJudgeNum(Jnum){
-    topic = "python/mqttvsai/"+Jnum;
+    topic = "python/mqtt/vsai/"+Jnum;
     Voted = false;
+    CloseModal();
 }
 
 
@@ -111,6 +114,8 @@ function onMessageArrived(message) {
     {
         Voted = false;
         logMessage("INFO", "Count RESET!!");
+        StartVote();
+
     }
 }
 
@@ -167,4 +172,3 @@ function logMessage(type, ...content) {
         console.log(logMessage);
     }
 }
-

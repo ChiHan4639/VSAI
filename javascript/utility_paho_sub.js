@@ -13,7 +13,7 @@ var clientId = makeid();
 
 var connected = false;
 
-var client = new Paho.mqttvsai.Client(hostname, Number(port), "/mqtt", clientId);
+var client = new Paho.MQTT.Client(hostname, Number(port), "/mqtt", clientId);
 
 //logMessage("INFO", "Connecting to Server: [Host: ", hostname, ", Port: ", port, ", Path: ", client.path, ", ID: ", clientId, "]");
 
@@ -50,7 +50,7 @@ function subscribe(Stopic) {
 }
 
 function publish(ledState) {
-    var topic = "python/mqttvsai";
+    var topic = "python/mqtt/vsai";
     var qos = 0;
     var message = ledState;
     var retain = false;
@@ -72,7 +72,14 @@ function disconnect() {
 }
 
 
-
+function refreshScore(){
+    document.getElementById('Tj1').text="＿＿＿";
+    document.getElementById('Tj2').text="＿＿＿";
+    document.getElementById('Tj3').text="＿＿＿";
+    document.getElementById('Tj4').text="＿＿＿";
+    document.getElementById('Tj5').text="＿＿＿";
+    publish("reset");
+}
 
 
 // called when the client loses its connection
@@ -86,27 +93,26 @@ function onConnectionLost(responseObject) {
 // called when a message arrives
 function onMessageArrived(message) {
     logMessage("INFO", "Message Recieved: [Topic: ", message.destinationName, ", Payload: ", message.payloadString, ", QoS: ", message.qos, ", Retained: ", message.retained, ", Duplicate: ", message.duplicate, "]");
-    if(message.destinationName == "python/countvsai"){
+    if(message.destinationName == "python/count/vsai"){
         document.getElementById('smname').text= message.payloadString;
-        //log.console("Get");
     }
-    else if(message.destinationName == "python/mqttvsai/J1"){
+    else if(message.destinationName == "python/mqtt/vsai/J1"){
         document.getElementById('Tj1').text= message.payloadString;
     }
-    else if(message.destinationName == "python/mqttvsai/J2"){
+    else if(message.destinationName == "python/mqtt/vsai/J2"){
         document.getElementById('Tj2').text= message.payloadString;
     }
-    else if(message.destinationName == "python/mqttvsai/J3"){
+    else if(message.destinationName == "python/mqtt/vsai/J3"){
         document.getElementById('Tj3').text= message.payloadString;
     }
-    else if(message.destinationName == "python/mqttvsai/J4"){
+    else if(message.destinationName == "python/mqtt/vsai/J4"){
         document.getElementById('Tj4').text= message.payloadString;
     }
-    else if(message.destinationName == "python/mqttvsai/J5"){
+    else if(message.destinationName == "python/mqtt/vsai/J5"){
         document.getElementById('Tj5').text= message.payloadString;
     }
     else{
-
+        
     }
     
 }
@@ -120,12 +126,12 @@ function onConnect(context) {
     logMessage("INFO", "Connection Success ", "[URI: ", connectionString, ", ID: ", context.invocationContext.clientId, "]");
 
     connected = true;
-    subscribe("python/countvsai");
-    subscribe("python/mqttvsai/J1");
-    subscribe("python/mqttvsai/J2");
-    subscribe("python/mqttvsai/J3");
-    subscribe("python/mqttvsai/J4");
-    subscribe("python/mqttvsai/J5");
+    subscribe("python/count/vsai");
+    subscribe("python/mqtt/vsai/J1");
+    subscribe("python/mqtt/vsai/J2");
+    subscribe("python/mqtt/vsai/J3");
+    subscribe("python/mqtt/vsai/J4");
+    subscribe("python/mqtt/vsai/J5");
 }
 
 
