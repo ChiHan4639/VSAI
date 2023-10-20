@@ -81,6 +81,24 @@ function refreshScore(){
     publish("reset");
 }
 
+function sendScore(){
+    var Audience = document.getElementById('smname').text;
+    var battle = Audience.split(" : ");
+    var Aresult =0;
+    if(battle[0] > battle[1]){
+        Aresult=1;
+    }
+    else if(battle[0] < battle[1]) {
+        Aresult=2;
+    }
+    else{
+        Aresult=0;
+    }
+    var Result = document.getElementById('Tj1').text + "," + document.getElementById('Tj2').text + "," + document.getElementById('Tj3').text + "," + document.getElementById('Tj4').text + "," + document.getElementById('Tj5').text + "," + Aresult.toString();
+    publish(Result);
+    //publish("4");
+}
+
 
 // called when the client loses its connection
 function onConnectionLost(responseObject) {
