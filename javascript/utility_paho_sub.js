@@ -92,7 +92,7 @@ function sendScore(){
         Aresult=2;
     }
     else{
-        Aresult=0;
+        Aresult=3;
     }
     var Result = document.getElementById('Tj1').text + "," + document.getElementById('Tj2').text + "," + document.getElementById('Tj3').text + "," + document.getElementById('Tj4').text + "," + document.getElementById('Tj5').text + "," + Aresult.toString();
     publish(Result);
