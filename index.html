@@ -15,6 +15,10 @@
     <!-- 引用MQTT的CDN -->
     <script src="javascript/mqttws31-min.js" type="text/javascript"></script>
 
+    <!-- Google Fonts引用 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 
 <body class="playerMode m-0">
@@ -37,10 +41,10 @@
     <div id="myModal2" class="modal">
 
         <!-- Modal content -->
-        <div class="modal-content">
+        <div class="modal-contentFix">
             <!--span class="close">&times;</span-->
             <div class="judgeDiv">
-                <a class="modalTitle">此回合已完成投票。<br>待評審完成評分後，將進入下一回合的比賽</a>
+                <a class="modalTitle">此回合已完成投票。<br>待評審完成評分後，<br>將進入下一回合的比賽</a>
             </div>
         </div>
 
@@ -50,22 +54,23 @@
     <div id="myModal3" class="modal">
 
         <!-- Modal content -->
-        <div class="modal-content">
+        <div class="modal-contentFix">
             <!--span class="close">&times;</span-->
-            <div class="judgeDiv">
-                <p class="modalTitle">觀眾評選方式</p>
+            <div class="announceDiv">
+                <p class="modalTitle fw600">[&ensp;觀眾評選方式&ensp;]</p>
                 <div class="textDiv">
                     <a class="modalText">
-                        1/ 觀看前方大螢幕的最終圖片<br>
-                        2/ 挑選喜歡的一方<br>
-                        3/ 按下該選手的代表顏色<br>
-                        [ 左邊：     
+                        1/&ensp;觀看前方大螢幕的最終圖片<br>
+                        2/&ensp;挑選喜歡的一方<br>
+                        3/&ensp;按下該選手的代表顏色<br>
+                        [&ensp;左邊：     
                     </a>
                     <a class="text_green">綠色 </a>
-                    <a class="modalText">／右邊：</a>
+                    <a class="modalText">&ensp;/&ensp;右邊：</a>
                     <a class="text_purple">紫色</a>
                     <a class="modalText"> ]<br> </a>
                 </div>
+                <br> 
                 <button class="CloseBtn" onclick="introOff()" >投票去</button-->
             </div>
         </div>

@@ -1,3 +1,13 @@
+p{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 400;
+}
+
+a{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 400 ;
+}
+
 .playerMode{
     background-color: black;
     padding: 2%;
@@ -48,6 +58,18 @@
     margin: 2px;
 }
 
+.fw400{
+    font-weight: 400 !important;
+}
+
+.fw600{
+    font-weight: 600 !important;
+}
+
+.fw800{
+    font-weight: 800 !important;
+}
+
 .titleTxt{
     color: white;
     font-weight: 600;
@@ -66,7 +88,11 @@
     height: 48vh!important;
     text-align: center;
 }
-  
+
+.textDiv{
+    line-height: 28px;
+}
+
 .center p {
     line-height: 1.5;
     display: inline-block;
@@ -76,18 +102,26 @@
     font-size: 3rem;
 }
 
+.announceDiv{
+    text-align: left;
+    min-width: 220px;
+    padding: 30%;
+}
+
 .judgeDiv{
     text-align: center;
+    min-width: 220px;
+    padding: 30%;
 }
 
 .JudgeBtn{
     color: white;
     background-color: #000000;
-    margin: 2% auto; /* 15% from the top and centered */
+    margin: 3% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid rgb(0, 255, 0);
-    font-size: 24px;
-    width: 50%;
+    font-size: 18px;
+    width: 100%;
 }
 
 .JudgeBtn :hover{
@@ -107,7 +141,7 @@
     padding: 12px;
     border: 1px solid rgb(0, 255, 0);
     font-size: 16px;
-    width: 30%;
+    width: 100%;
 }
 
 /* -----Modal----- */
@@ -135,6 +169,17 @@
     width: 80%; /* Could be more or less, depending on screen size */
   }
 
+  .modal-contentFix {
+    background-color: #000000;
+    margin: -5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    width: 80%; /* Could be more or less, depending on screen size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
   .modalTitle{
     color: white;
     font-size: 20px;
@@ -142,7 +187,6 @@
 
   .modalText{
     color: white;
-    font-size: 14px;
   }
   
   /* The Close Button */
