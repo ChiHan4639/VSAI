@@ -127,18 +127,20 @@
             document.cookie = 'voted=0; max-age=5';
         }
         function introOn(){
-            console.log(document.cookie); 
+            //console.log("目前cookies: "+document.cookie); 
             //document.cookie = 'voted=0; max-age=10';
             var votedState= document.cookie
             var Seper = votedState.split('=');
-            console.log(Seper[1]);
+            console.log("目前cookies: "+Seper[1]);
             
             if(Seper[1] == "1")
             {
                 modal2.style.display = "block";
+                modal3.style.display = "none";
             }
             else{
                 modal3.style.display = "block";
+                modal2.style.display = "none";
             }
 
         }
