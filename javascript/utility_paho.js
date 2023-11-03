@@ -55,7 +55,7 @@ function publish(ledState) {
     var qos = 0;
     var message = ledState;
     var retain = false;
-
+    document.cookie = 'voted=1; max-age=120';
     if(Voted == false){
         logMessage("INFO", "Publishing Message: [Topic: ", topic, ", Payload: ", message, ", QoS: ", qos, ", Retain: ", retain, "]");
         message = new Paho.MQTT.Message(message);
@@ -63,10 +63,9 @@ function publish(ledState) {
         message.qos = Number(qos);
         message.retained = retain;
         client.send(message);
-        document.cookie = 'voted=1; max-age=60';
+        
         //無法重複投票
         Voted = true; 
-
         //alert('投票成功');
         StopVote();
     }
