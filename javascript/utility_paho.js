@@ -63,6 +63,7 @@ function publish(ledState) {
         message.qos = Number(qos);
         message.retained = retain;
         client.send(message);
+        document.cookie = 'voted=1; max-age=60';
         //無法重複投票
         Voted = true; 
 

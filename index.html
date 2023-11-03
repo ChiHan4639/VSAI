@@ -22,7 +22,7 @@
 </head>
 
 <body class="playerMode m-0">
-
+    <!--button onclick="printCookies()">測試</button-->
     <div class="container">
         <div class="bg_green w100 center" onclick='publish("2");'>
             <p class="">點我讓綠色贏</p>
@@ -67,6 +67,7 @@
                     </a>
                     <a class="text_green">綠色 </a>
                     <a class="modalText">&ensp;/&ensp;右邊：</a>
+                    ,
                     <a class="text_purple">紫色</a>
                     <a class="modalText"> ]<br> </a>
                 </div>
@@ -123,12 +124,31 @@
         }
         function StartVote(){
             modal2.style.display = "none";
+            document.cookie = 'voted=0; max-age=5';
         }
         function introOn(){
-            modal3.style.display = "block";
+            console.log(document.cookie); 
+            //document.cookie = 'voted=0; max-age=10';
+            var votedState= document.cookie
+            var Seper = votedState.split('=');
+            console.log(Seper[1]);
+            
+            if(Seper[1] == "1")
+            {
+                modal2.style.display = "block";
+            }
+            else{
+                modal3.style.display = "block";
+            }
+
         }
         function introOff(){
             modal3.style.display = "none";
+        }
+        function printCookies(){
+            var votedState= document.cookie
+            var Seper = votedState.split('=');
+            console.log(Seper[1]);
         }
 
     </script>
