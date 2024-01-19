@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'enigma';
-    src: url('fonts/enigma.otf') format('otf');
+    src: url('fonts/enigma.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -116,6 +116,7 @@ a{
     background-color: var(--sidebarBG);
     padding: 0px !important;
     height: 100vh;
+    /* width: 250px; */
     /*min-width: 250px;*/
 }
 
@@ -129,6 +130,15 @@ a{
 .Sidebar_Title_Img{
     width: 100%;
     max-width: 250px;
+}
+
+.Sidebar_Footer{
+    width: 100%;
+    height: 60px;
+    padding: 30px;
+    background-color: #2C2C2C;
+    display: block;
+    bottom: 0;
 }
 
 .sidebarList{
@@ -202,6 +212,7 @@ a{
     padding: 0px !important;
     height: 100vh;
     overflow-y: scroll;
+    /* width: 100% -250px !important; */
 }
 
 .Chatroom_Title_Div{
@@ -256,6 +267,38 @@ a{
     height: 60px;
     padding: 6px;
     border-radius: 30px;
+}
+
+.ResultPic{
+    width: 80% !important;
+    display: flex;
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    height: auto;
+    background-color: (--bg);
+    border-radius: 30px;
+}
+.RGpic{
+    background-color: var(--VSGreen);
+    width: 50%;
+    padding: 3%;
+    border-radius: 30px 0px 0px 30px;
+}
+.RPpic{
+    background-color: var(--VSPurple);
+    width: 50%;
+    padding: 3%;
+    border-radius: 0px 30px 30px 0px;
+}
+
+.ResultPic img {
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+    display: block;
+    filter: none;
+    margin-top: 10px;
 }
 
 .ChatContainer{
@@ -374,3 +417,62 @@ a{
     color: black;
   }
 
+/* 首頁modal */
+
+.home{
+    background-color: #000000;
+}
+
+.HomeDiv{
+    width: 100%;
+    padding: 20vh 30%;
+    height: 100vh;
+}
+.homePics{
+    width: 100%;
+    display: block;
+}
+.homeArrow{
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+.CoverBlack{
+    background-color: #000000;
+    z-index: 1055;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.modal{
+    z-index: 1060;
+}
+
+/* 自定義 modal 顯示時的動畫 */
+.modal.left .modal-dialog {
+    position: fixed;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    -ms-transform: translate3d(-100%, 0, 0);
+    -o-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+.modal.left.fade .modal-dialog {
+    -webkit-transition: transform 0.3s ease-out;
+       -moz-transition: transform 0.3s ease-out;
+        -o-transition: transform 0.3s ease-out;
+           transition: transform 0.3s ease-out;
+}
+
+.modal.left.fade.show .modal-dialog {
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}

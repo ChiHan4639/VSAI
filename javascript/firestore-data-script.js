@@ -7,10 +7,11 @@ var imageRef = storageRef.child('vsai-55c1d.appspot.com/0000001-2.webp');*/
 
 //var LastID ="000000";
 
-function HoldData() {
-    db.collection("2024").doc("01").collection("18").get().then((querySnapshot) => {
+function HoldData(year,month,day) {
+    db.collection(year).doc(month).collection(day).get().then((querySnapshot) => {
         var count = 0;
-        
+        clearAllListItems();
+        document.getElementById("coverBlack").style.display="none";
         querySnapshot.forEach((doc) => {
             // 將每個文檔的數據存儲到 sessionStorage
             sessionStorage.setItem(doc.id, JSON.stringify(doc.data()));
@@ -51,6 +52,13 @@ function HoldData() {
     // console.log("-----------------------------------");
     // docData = getDataFromSessionStorage('0000002');
     // console.log(docData); // 如果存在，將打印 doc1 的數據
+}
+//myList
+function clearAllListItems() {
+    var ul = document.getElementById("myList"); // 選擇 <ul> 元素
+    while (ul.firstChild) {
+        ul.removeChild(ul.firstChild); // 反覆移除第一個子元素
+    }
 }
 
 function getDataFromSessionStorage(docName) {
@@ -117,7 +125,9 @@ function getData(dataIn) {
     displayImage(data.Apic3+".webp","Apic3");
     displayImage(data.Bpic3+".webp","Bpic3");
     createCommentFromText(data.CChat3,"CChatDiv3");
-    console.log(data.Winner);
+    displayImage(data.Apic3+".webp","Apic4");
+    displayImage(data.Bpic3+".webp","Bpic4");
+    //console.log(data.Winner);
     SetResultTitle(data.Winner);
 }
 
@@ -158,7 +168,7 @@ function createCommentFromText(text,containerId) {
 
 function SetResultTitle(text) {
     const container = document.getElementById("resultDiv");
-    const resultWord =document. getElementById("resultTitle");
+    const resultWord =document.getElementById("resultTitle");
 
     if(text == "1"){
         container.style.backgroundColor = "#00FF00";
@@ -189,11 +199,13 @@ function displayImage(imagePath,imageID) {
     });
 }
 
-
 // 當頁面加載完畢時，調用 getData 函數
 //window.onload = getData;
-window.onload = HoldData;
-
+window.onload = () => {
+    //HoldData("2024","01","18");
+    const myModal = new bootstrap.Modal('#fullscreenModal');
+    myModal.show();
+  }
 
 // 備用區
 /*
@@ -237,3 +249,4 @@ function getData() {
         console.log("Error getting document:", error);
     });
 }*/
+
