@@ -25,9 +25,12 @@
     
     <div class="Mycontainer">
         <div class="row">
-            <div class="col-md-2 col-12 Sidebar">
+            <div class="col-xl-2 col-12 Sidebar" id="sidebarCollapse">
                 <div class="Sidebar_Title justify-content-center align-items-center ">
                     <img src="img/web/02_chat_title.png" class="Sidebar_Title_Img" alt="...">
+                    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PicModal">
+                      Launch static backdrop modal
+                    </button> -->
                 </div>
                 <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fullscreenModal">
                   打開全屏 Modal
@@ -66,17 +69,23 @@
                   <img src="img/web/02_chat_back.png" class="Sidebar_Title_Img" alt="...">
                 </div>
             </div>
-            <div class="col-md-10 col-12 Chatroom">
+            <div class="col-xl-10 col-12 Chatroom">
                 <div class="Chatroom_Title_Div justify-content-left align-items-left ">
                     <div class="numRound">
-                        <a>01</a>
+                        <a id="RoundNum">01</a>
                     </div>
-                    <a class="Chatroom_title">Round01</a>
+                    <!-- <button class="" type="button" onclick="toggleSidebar()">
+                      按鈕
+                    </button> -->
+                    <!-- <div class="circle">
+                      02
+                    </div> -->
+                    <a class="Chatroom_title" id="RoundTitle">Round01</a>
                 </div>
-                
-                <div class="container" style="margin-top: 140px;">
+                <!-- Start of 聊天室內容 -->
+                <div class="container" style="margin-top: 140px; position: relative;">
                     <!-- 題目一 -->
-                    <div class="topicDiv">
+                    <div class="topicDiv" id="ChatStartPoint">
                         <p class="topicWord"><span id="CTopic1"></span></p>
                         <p class="topicWord"><span id="ETopic1">Topic&thinsp;1&ensp;|&ensp;</span></p>
                     </div>
@@ -86,7 +95,7 @@
                           <img src="img/web/03_chat_G.png" alt="">
                           <div class="bubble">
                             <span id="Apromp1"></span>
-                            <!-- <img id="myImage" src="" alt=""> -->
+                            <br>
                             <img id="Apic1" src="img/img404.jpg" alt="">
                           </div>
                         </div>
@@ -94,6 +103,7 @@
                           <img src="img/web/03_chat_P.png" alt="">
                           <div class="bubble">
                             <span id="Bpromp1"></span>
+                            <br>
                             <img id="Bpic1" src="img/img404.jpg" alt="">
                           </div>
                         </div>
@@ -112,6 +122,7 @@
                           <img src="img/web/03_chat_G.png" alt="">
                           <div class="bubble">
                             <span id="Apromp2"></span>
+                            <br>
                             <img id="Apic2" src="img/img404.jpg" alt="">
                           </div>
                         </div>
@@ -119,6 +130,7 @@
                           <img src="img/web/03_chat_P.png" alt="">
                           <div class="bubble">
                             <span id="Bpromp2"></span>
+                            <br>
                             <img id="Bpic2" src="img/img404.jpg" alt="">
                           </div>
                         </div>
@@ -137,6 +149,7 @@
                           <img src="img/web/03_chat_G.png" alt="">
                           <div class="bubble">
                             <span id="Apromp3"></span>
+                            <br>
                             <img id="Apic3" src="img/img404.jpg" alt="">
                           </div>
                         </div>
@@ -144,6 +157,7 @@
                           <img src="img/web/03_chat_P.png" alt="">
                           <div class="bubble">
                             <span id="Bpromp3"></span>
+                            <br>
                             <img id="Bpic3" src="img/img404.jpg" alt="">
                           </div>
                         </div>
@@ -164,8 +178,15 @@
                       <p class="resultWord" id="resultTitle">WINNER IS GREEN SIDE</p>
                     </div>
                 </div>
-                
-            </div>
+                <!-- <div class="modal-dialog modal-dialog-centered" id="PicModal">
+                  <img id="PicModalimg" src="img/img404.jpg" alt="">
+                </div> -->
+              </div>
+              <!-- <div class="PicModal">
+                <img id="PicModalimg" src="img/img404.jpg" alt="">
+              </div> -->
+              
+              <!-- End of 聊天室內容 -->
         </div>
     </div>
 
@@ -176,7 +197,7 @@
       <div class="modal-dialog modal-fullscreen">
         <div class="modal-content home">
           <div class="modal-body">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             <!-- Modal 內容 -->
             <div class="HomeDiv">
               <div class="d-flex justify-content-center">
@@ -323,6 +344,9 @@
                 items.forEach(function(item) {
                     item.classList.remove("clicked");
                 });
+                var divTextContent = event.target.querySelector('div.circle').textContent;
+                document.getElementById("RoundNum").textContent = divTextContent;
+                document.getElementById("RoundTitle").textContent = "Round"+divTextContent;
 
                 // 然後只給當前點擊的列表項添加 'clicked' 類
                 event.target.classList.add("clicked");
@@ -330,9 +354,12 @@
                 var docData = getDataFromSessionStorage(event.target.id);
                 console.log(docData);
                 getData(docData);
+                //window.scrollTo({ top: 0, behavior: 'smooth' });
+                document.getElementById("ChatStartPoint").scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
 
       </script>
+
 </body>
 </html>

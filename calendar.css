@@ -6,7 +6,7 @@
 }
 
 :root {
-    --primary-clr: #b38add;
+    --primary-clr: #6F34FF;
     --VSGreen: #00FF00;
     --VSPurple: #6F34FF;
   }
@@ -16,7 +16,8 @@
     box-sizing: border-box;
   }
   /* nice scroll bar */
-  ::-webkit-scrollbar {
+
+  /* ::-webkit-scrollbar {
     width: 5px;
   }
   ::-webkit-scrollbar-track {
@@ -26,7 +27,7 @@
   ::-webkit-scrollbar-thumb {
     background: var(--primary-clr);
     border-radius: 50px;
-  }
+  } */
   
   /* body {
     position: relative;
@@ -61,7 +62,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     color: #878895;
     border-radius: 5px;
     background-color: black;

@@ -116,14 +116,22 @@ a{
     background-color: var(--sidebarBG);
     padding: 0px !important;
     height: 100vh;
+    position: relative;
     /* width: 250px; */
     /*min-width: 250px;*/
 }
 
+@media (max-width: 1199.98px) {
+    #sidebarCollapse {
+        display: none;
+        width: 250px !important;
+    }
+}
+
 .Sidebar_Title{
     width: 100%;
-    height: 100px;
-    padding: 30px;
+    height: auto;
+    padding: 20px;
     background-color: #2C2C2C;
 }
 
@@ -134,10 +142,11 @@ a{
 
 .Sidebar_Footer{
     width: 100%;
-    height: 60px;
-    padding: 30px;
+    height: auto;
+    padding: 20px;
     background-color: #2C2C2C;
     display: block;
+    position: absolute;
     bottom: 0;
 }
 
@@ -212,6 +221,7 @@ a{
     padding: 0px !important;
     height: 100vh;
     overflow-y: scroll;
+    overflow-x: hidden;
     /* width: 100% -250px !important; */
 }
 
@@ -220,7 +230,10 @@ a{
     top: 0;
     width: 100%;
     height: 100px;
-    border: #2C2C2C 1px solid;
+    /* border: #2C2C2C 1px solid; */
+    /* box-shadow: -6px -8px 50px #a8a8a8;
+    -webkit-box-shadow: -6px -8px 50px #a8a8a8;
+    -moz-box-shadow: -6px -8px 50px #a8a8a8; */
     background-color: var(--bg);
     padding: 30px;
     z-index: 10;
@@ -233,7 +246,7 @@ a{
     font-size: 24px; 
 }
 
-.numRound {
+ .numRound {
     display: inline-block;
     justify-content: center;
     align-items: center; 
@@ -246,8 +259,8 @@ a{
     font-size: 24px; 
 }
 .numRound a{
-    margin-left: 5px;
-}
+    margin-left: 4px;
+} 
 .topicDiv{
     width: 80% !important;
     margin: auto;
@@ -320,15 +333,16 @@ a{
 
 .chat .message-container {
     padding: 5px;
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 100%;
     height: 96%;
     padding-right: 18px;
     box-sizing: content-box;
+    background-color: var(--bg);
   }
   
   .chat .divider span {
-    background: white;
+    /*background: white;*/
     padding: 0px 10px;
   }
   
@@ -376,7 +390,7 @@ a{
 
   .chat .other .bubble {
     border: var(--VSGreen) solid 1px;
-    text-align: right;
+    text-align: left;
   }
   
   .chat .other .bubble:before {
@@ -449,6 +463,22 @@ a{
 }
 .modal{
     z-index: 1060;
+}
+
+.modalHide{
+    display: none;
+}
+
+.PicModal{
+    width: 100%;
+    height: calc(100vh - 100px);
+    background-color: rgba(148, 148, 148, 30%);
+    position: absolute;
+    top: 100px;
+}
+
+.PicModal img{
+
 }
 
 /* 自定義 modal 顯示時的動畫 */

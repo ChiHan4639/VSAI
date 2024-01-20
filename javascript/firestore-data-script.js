@@ -7,9 +7,12 @@ var imageRef = storageRef.child('vsai-55c1d.appspot.com/0000001-2.webp');*/
 
 //var LastID ="000000";
 
+//已由最新排列到最舊
 function HoldData(year,month,day) {
-    db.collection(year).doc(month).collection(day).get().then((querySnapshot) => {
-        var count = 0;
+    db.collection(year).doc(month).collection(day).orderBy('ID', 'desc').get().then((querySnapshot) => {
+        var count = querySnapshot.size;
+        const LastID= "";
+        //console.log("這裡這裡"+querySnapshot.size);
         clearAllListItems();
         document.getElementById("coverBlack").style.display="none";
         querySnapshot.forEach((doc) => {
@@ -18,10 +21,10 @@ function HoldData(year,month,day) {
             //新增li到list中
             //Round編號
                 var currentNo = "01";
-                if(count<9){
-                    currentNo="0"+(count+1)
+                if(count<=9){
+                    currentNo= "0"+count;
                 }else{
-                    currentNo=count+1
+                     currentNo=count
                 }
             //取出對話前10個字，目前有些資料為空
             if(doc.data().CChat1 != ""){
@@ -33,15 +36,30 @@ function HoldData(year,month,day) {
             }else{
                 creatListItem(doc.id,currentNo,"","myList");
             }
-            count++;
+            count--;
             
-            LastID = doc.id;  
-            console.log(LastID);   
+            // LastID = doc.id;  
+            // console.log("這裡"+LastID);   
+
+            //顯示最新一筆在前端
+
+            // var docData = getDataFromSessionStorage(target.id);
+            // console.log(docData);
+            // getData(docData);
+
             //console.log("這裡");   
-            var docData = getDataFromSessionStorage(doc.id);
+            
+        })
+            var ul = document.getElementById("myList");
+            //聊天室中顯示最新一筆資料
+            var docData = getDataFromSessionStorage(ul.firstChild.id);
             //console.log(docData);  
-            //getData(docData);
-        });
+            getData(docData);
+            var divTextContent = ul.firstChild.querySelector('div.circle').textContent;
+            document.getElementById("RoundNum").textContent = divTextContent;
+            document.getElementById("RoundTitle").textContent = "Round"+divTextContent;
+            ul.firstChild.classList.add("clicked");
+        ;
     }).catch((error) => {
         console.log("Error getting documents: ", error);
     });
@@ -104,24 +122,24 @@ function creatListItem(IdNum,NoNum,Front10,ToIdName) {
 
 function getData(dataIn) {
     var data = dataIn;
-    document.getElementById("CTopic1").textContent = "題目1 | "+ data.CTopic1;
-    document.getElementById("ETopic1").textContent = "Topic1 | "+ data.ETopic1;
-    document.getElementById("Apromp1").textContent = data.Apromp1;
-    document.getElementById("Bpromp1").textContent = data.Bpromp1;
+    showTextContent(data.CTopic1,"CTopic1");
+    showTextContent(data.ETopic1,"ETopic1");
+    showTextContent(data.Apromp1,"Apromp1");
+    showTextContent(data.Bpromp1,"Bpromp1");
     displayImage(data.Apic1+".webp","Apic1");
     displayImage(data.Bpic1+".webp","Bpic1");
     createCommentFromText(data.CChat1,"CChatDiv1");
-    document.getElementById("CTopic2").textContent = "題目2 | "+ data.CTopic2;
-    document.getElementById("ETopic2").textContent = "Topic2 | "+data.ETopic2;
-    document.getElementById("Apromp2").textContent = data.Apromp2;
-    document.getElementById("Bpromp2").textContent = data.Bpromp2;
+    showTextContent(data.CTopic2,"CTopic2");
+    showTextContent(data.ETopic2,"ETopic2");
+    showTextContent(data.Apromp2,"Apromp2");
+    showTextContent(data.Bpromp2,"Bpromp2");
     displayImage(data.Apic2+".webp","Apic2");
     displayImage(data.Bpic2+".webp","Bpic2");
     createCommentFromText(data.CChat2,"CChatDiv2");
-    document.getElementById("CTopic3").textContent = "題目3 | "+ data.CTopic3;
-    document.getElementById("ETopic3").textContent = "Topic3 | "+data.ETopic3;
-    document.getElementById("Apromp3").textContent = data.Apromp3;
-    document.getElementById("Bpromp3").textContent = data.Bpromp3;
+    showTextContent(data.CTopic3,"CTopic3");
+    showTextContent(data.ETopic3,"ETopic3");
+    showTextContent(data.Apromp3,"Apromp3");
+    showTextContent(data.Bpromp3,"Bpromp3");
     displayImage(data.Apic3+".webp","Apic3");
     displayImage(data.Bpic3+".webp","Bpic3");
     createCommentFromText(data.CChat3,"CChatDiv3");
@@ -131,39 +149,82 @@ function getData(dataIn) {
     SetResultTitle(data.Winner);
 }
 
+function showTextContent(data,elementID) {
+    var target = document.getElementById(elementID);
+    try{
+        switch (elementID) {
+            case "CTopic1":
+                target.textContent =  "題目1 | "+data;
+                break;
+            case "CTopic2":
+                target.textContent =  "題目2 | "+data;
+                break;
+            case "CTopic3":
+                target.textContent =  "題目3 | "+data;
+                break;
+            case "ETopic1":
+                target.textContent = "Topic1 | "+data;
+                break;
+            case "ETopic2":
+                target.textContent = "Topic2 | "+data;
+                break;
+            case "ETopic3":
+                target.textContent = "Topic3 | "+data;
+                break;
+            default:
+                target.textContent = data;
+                break;
+        }
+        
+    }catch(error) {
+        console.error("Error loading image: ", error);
+    };
+}
+
+function clearAllChatItems(ChatID) {
+    var ul = document.getElementById(ChatID); // 選擇 <ul> 元素
+    while (ul.firstChild) {
+        ul.removeChild(ul.firstChild); // 反覆移除第一個子元素
+    }
+}
+
 function createCommentFromText(text,containerId) {
     const container = document.getElementById(containerId);
-
-    const parts = text.split(/(PPurle:|GGreen:)/).slice(1);
-    for (let i = 0; i < parts.length; i += 2) {
-        const type = parts[i].trim();
-        const content = parts[i + 1].trim();
-        //console.log(type);
-        //console.log(content);
-
-        // 創建基本的 div 結構
-        const commentDiv = document.createElement("div");
-        commentDiv.className = type === "PPurle:" ? "comment me" : "comment other";
-
-        // 添加圖像
-        const img = document.createElement("img");
-        img.src = type === "PPurle:" ? "img/web/03_chat_P.png" : "img/web/03_chat_G.png";
-        commentDiv.appendChild(img);
-
-        // 創建 bubble 和 span
-        const bubbleDiv = document.createElement("div");
-        bubbleDiv.className = "bubble";
-
-        const span = document.createElement("span");
-        span.textContent = content;
-
-        bubbleDiv.appendChild(span);
-        commentDiv.appendChild(bubbleDiv);
-
-        // 將創建的元素添加到指定的容器中
-        container.appendChild(commentDiv);
-
+    clearAllChatItems(containerId);
+    if(text == ""){
+        console.log(containerId+"沒有chat紀錄");
+        }else{
+        const parts = text.split(/(PPurle:|GGreen:)/).slice(1);
+        for (let i = 0; i < parts.length; i += 2) {
+            const type = parts[i].trim();
+            const content = parts[i + 1].trim();
+            //console.log(type);
+            //console.log(content);
+    
+            // 創建基本的 div 結構
+            const commentDiv = document.createElement("div");
+            commentDiv.className = type === "PPurle:" ? "comment me" : "comment other";
+    
+            // 添加圖像
+            const img = document.createElement("img");
+            img.src = type === "PPurle:" ? "img/web/03_chat_P.png" : "img/web/03_chat_G.png";
+            commentDiv.appendChild(img);
+    
+            // 創建 bubble 和 span
+            const bubbleDiv = document.createElement("div");
+            bubbleDiv.className = "bubble";
+    
+            const span = document.createElement("span");
+            span.textContent = content;
+    
+            bubbleDiv.appendChild(span);
+            commentDiv.appendChild(bubbleDiv);
+    
+            // 將創建的元素添加到指定的容器中
+            container.appendChild(commentDiv);
+        }
     }
+    
 }
 
 function SetResultTitle(text) {
@@ -183,10 +244,11 @@ function displayImage(imagePath,imageID) {
     var storage = firebase.storage();
     var storageRef = storage.ref();
     var imageRef = storageRef.child(imagePath);
+    var img = document.getElementById(imageID);
 
     imageRef.getDownloadURL().then(function(url) {
         // 创建或获取一个 <img> 元素
-        var img = document.getElementById(imageID);
+        
         if (!img) {
             img = document.createElement('img');
             img.id = imageID;
@@ -196,6 +258,7 @@ function displayImage(imagePath,imageID) {
         img.src = url;
     }).catch(function(error) {
         console.error("Error loading image: ", error);
+        img.src = "img/img404.jpg";
     });
 }
 
@@ -250,3 +313,32 @@ function getData() {
     });
 }*/
 
+/*Ver2 文字沒有除錯*/
+// function getData(dataIn) {
+//     var data = dataIn;
+//     document.getElementById("CTopic1").textContent = "題目1 | "+ data.CTopic1;
+//     document.getElementById("ETopic1").textContent = "Topic1 | "+ data.ETopic1;
+//     document.getElementById("Apromp1").textContent = data.Apromp1;
+//     document.getElementById("Bpromp1").textContent = data.Bpromp1;
+//     displayImage(data.Apic1+".webp","Apic1");
+//     displayImage(data.Bpic1+".webp","Bpic1");
+//     createCommentFromText(data.CChat1,"CChatDiv1");
+//     document.getElementById("CTopic2").textContent = "題目2 | "+ data.CTopic2;
+//     document.getElementById("ETopic2").textContent = "Topic2 | "+data.ETopic2;
+//     document.getElementById("Apromp2").textContent = data.Apromp2;
+//     document.getElementById("Bpromp2").textContent = data.Bpromp2;
+//     displayImage(data.Apic2+".webp","Apic2");
+//     displayImage(data.Bpic2+".webp","Bpic2");
+//     createCommentFromText(data.CChat2,"CChatDiv2");
+//     document.getElementById("CTopic3").textContent = "題目3 | "+ data.CTopic3;
+//     document.getElementById("ETopic3").textContent = "Topic3 | "+data.ETopic3;
+//     document.getElementById("Apromp3").textContent = data.Apromp3;
+//     document.getElementById("Bpromp3").textContent = data.Bpromp3;
+//     displayImage(data.Apic3+".webp","Apic3");
+//     displayImage(data.Bpic3+".webp","Bpic3");
+//     createCommentFromText(data.CChat3,"CChatDiv3");
+//     displayImage(data.Apic3+".webp","Apic4");
+//     displayImage(data.Bpic3+".webp","Bpic4");
+//     //console.log(data.Winner);
+//     SetResultTitle(data.Winner);
+// }
