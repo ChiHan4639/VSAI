@@ -207,7 +207,7 @@ function createCommentFromText(text,containerId) {
     
             // 添加圖像
             const img = document.createElement("img");
-            img.src = type === "PPurle:" ? "img/web/03_chat_P.png" : "img/web/03_chat_G.png";
+            img.src = type === "PPurle:" ? "../_static/img/web/03_chat_P.png" : "../_static/img/web/03_chat_G.png";
             commentDiv.appendChild(img);
     
             // 創建 bubble 和 span
@@ -258,7 +258,7 @@ function displayImage(imagePath,imageID) {
         img.src = url;
     }).catch(function(error) {
         console.error("Error loading image: ", error);
-        img.src = "img/img404.jpg";
+        img.src = "../_static/img/img404.jpg";
     });
 }
 

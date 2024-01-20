@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'enigma';
-    src: url('fonts/enigma.otf') format('opentype');
+    src: url('../_static/fonts/enigma.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
