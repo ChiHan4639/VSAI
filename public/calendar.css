@@ -138,6 +138,23 @@
     font-weight: 400;
     margin-bottom: 20px;
   }
+
+/* 手機響應式 */
+
+  @media (max-width: 768px) {
+    .HomeDiv {
+      padding: 18vh 18% !important;
+    }
+    .calendar .days {
+      font-size: 32px !important;
+    }
+    .calendar .days .today {
+      font-size: 32px !important;
+    }
+    .calendar .days .active {
+      font-size: 32px !important;
+    }
+  }
   .calendar .days .day {
     width: 14.28%;
     height: 90px;
